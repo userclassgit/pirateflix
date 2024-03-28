@@ -1,0 +1,65 @@
+@charset "utf-8";
+
+/* :root {
+
+} */
+
+.container {
+    width: min(100% - 30px, 1080px);
+    margin-inline: auto;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex {
+    display: flex;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: rgb(0, 26, 70);
+  color: rgb(221, 221, 221);
+}
+
+.main-div {
+  flex-direction: column;
+  position: relative;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-container form {
+  width: 100%;
+}
+
+.dropdown-menu {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  background-color: white;
+  color: black;
+  top: 100%;
+  left: 0;
+}
+
+.movie-info {
+  display: flex;
+  align-items: start;
+  gap: 20px;
+}
+
+.movie-info img {
+  height: 300px;
+  width: auto;
+}
+
+.movie-info ul {
+  display: flex;
+  gap: 10px;
+}
