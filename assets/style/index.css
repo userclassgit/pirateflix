@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 :root {
-  --vertical-spacing: 5rem;
+  --vertical-spacing: 6rem;
   --border-radius: 7px;
   --element-paddings: 1.6rem;
   --red: #C82A3C;
@@ -35,6 +35,22 @@ body {
 .main-div {
   flex-direction: column;
   position: relative;
+}
+
+.title-container {
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.site-subtitle {
+  margin-top: 1.3rem;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  font-size: 1.7rem;
+  font-weight: 100;
+  font-style: normal;
 }
 
 .site-title {
