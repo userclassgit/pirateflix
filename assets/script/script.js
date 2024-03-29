@@ -23,7 +23,7 @@ function createListItem(text) {
 function handleListItemClick() {
   searchInput.value = this.textContent;
   dropdownMenu.innerHTML = '';
-  dropdownMenu.classList.remove('visible'); // Remove the 'visible' class when list item is clicked
+  dropdownMenu.classList.remove('visible');
 }
 
 // Function to populate dropdown menu with given movies
