@@ -102,8 +102,9 @@ button[type="submit"]:hover {
   width: min(100%, 80rem);
 
   img {
-    height: 300px;
-    width: auto;
+    width: 20rem;
+    height: 100%;
+    object-fit: cover;
     border-radius: var(--border-radius);
   }
 

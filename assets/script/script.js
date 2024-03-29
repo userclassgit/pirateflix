@@ -6,108 +6,109 @@ const searchInput = select(".search");
 const searchButton = select('button');
 const dropdownMenu = select('.dropdown-menu');
 
+/*
+==========================================
+INPUT FIELD FUNCTIONALITY
+==========================================
+*/
 
+// Function to create a list item with given text
+function createListItem(text) {
+  const li = document.createElement('li');
+  li.textContent = text;
+  return li;
+}
+
+// Function to handle click event on list item
+function handleListItemClick() {
+  searchInput.value = this.textContent;
+  dropdownMenu.innerHTML = '';
+}
+
+// Function to populate dropdown menu with given movies
+function populateDropdownMenu(movies) {
+  movies.forEach(movie => {
+    const li = createListItem(movie.title);
+    li.addEventListener('click', handleListItemClick);
+    dropdownMenu.appendChild(li);
+  });
+}
+
+// Callback function for search input event listener
 let dropdownCallback = function() {
-  // Clear dropdown menu
   dropdownMenu.innerHTML = '';
 
-  // Filter movies
-  // The this keyword is the search input
   const keyword = this.value.toLowerCase();
   const filteredMovies = movies.filter(movie => movie.title.toLowerCase().includes(keyword));
 
-  if (filteredMovies.length === 0) {
-    // If no movies were found, show a "Movie not found" message
-    const li = document.createElement('li');
-    li.textContent = "Movie not found";
-    dropdownMenu.appendChild(li);
+  if (filteredMovies.length > 0) {
+    populateDropdownMenu(filteredMovies);
   } else {
-    // Populate dropdown menu
-    filteredMovies.forEach(movie => {
-      const li = document.createElement('li');
-      li.textContent = movie.title;
-      dropdownMenu.appendChild(li);
-
-      // Add click event listener to li
-      li.addEventListener('click', function() {
-        // Set search input value to clicked li's text
-        searchInput.value = this.textContent;
-        // Clear dropdown menu
-        dropdownMenu.innerHTML = '';
-      });
-    });
+    dropdownMenu.appendChild(createListItem("Movie not found"));
   }
 
-  // Show dropdown menu
-  dropdownMenu.style.display = 'block';
-
-  // If search input field is cleared, hide dropdown menu
-  if (!this.value) {
-    dropdownMenu.style.display = 'none';
-  }
+  dropdownMenu.style.display = this.value ? 'block' : 'none';
 };
 
+// Adding event listener to search input
 listen('input', searchInput, dropdownCallback);
 
-searchButton.addEventListener('click', function(event) {
+/*
+==========================================
+SEARCH BUTTON FUNCTIONALITY
+==========================================
+*/
+
+// Function to create an element with given tag, text, and parent
+function createElement(tag, text, parent) {
+  const element = document.createElement(tag);
+  if (text) element.textContent = text;
+  if (parent) parent.appendChild(element);
+  return element;
+}
+
+// Function to create a button with given icon class, text, and parent
+function createButton(iconClass, text, parent) {
+  const button = createElement('button', null, parent);
+  button.innerHTML = `<i class="${iconClass}"></i> ${text}`;
+  return button;
+}
+
+// Function to create and append movie elements to the movie container
+function createMovieElements(movie, movieContainer) {
+  const movieDiv = createElement('div', null, movieContainer);
+  movieDiv.classList.add('movie-info');
+
+  const img = createElement('img', null, movieDiv);
+  img.src = movie.poster;
+
+  const textDiv = createElement('div', null, movieDiv);
+
+  createElement('h2', movie.title, textDiv);
+  createElement('p', `${movie.year} | ${movie.runningTime}`, textDiv);
+  createElement('p', movie.description, textDiv);
+
+  const genreList = createElement('ul', null, textDiv);
+  movie.genre.forEach(genre => createElement('li', genre, genreList));
+
+  const downloadButtonDiv = createElement('div', null, textDiv);
+  downloadButtonDiv.classList.add('download-button-div');
+
+  createButton('fas fa-download', 'Torrent Download', downloadButtonDiv);
+  createButton('fas fa-magnet', 'Magnet Download', downloadButtonDiv);
+}
+
+// Add a click event listener to the search button to search for a movie and display its details
+listen('click', searchButton, function(event) {
   event.preventDefault();
 
-  const movieContainer = document.querySelector('.movie-container');
-  movieContainer.innerHTML = ''; // Clear the movieContainer
+  const movieContainer = select('.movie-container');
+  movieContainer.innerHTML = '';
 
-  const keyword = searchInput.value;
-  const movie = movies.find(movie => movie.title.toLowerCase() === keyword.toLowerCase());
+  const keyword = searchInput.value.toLowerCase();
+  const movie = movies.find(movie => movie.title.toLowerCase() === keyword);
 
   if (movie) {
-    const movieDiv = document.createElement('div');
-    movieDiv.classList.add('movie-info'); // Add a class for styling
-
-    const img = document.createElement('img');
-    img.src = movie.poster;
-    movieDiv.appendChild(img);
-
-    const textDiv = document.createElement('div'); // Create a new div for the text information
-
-    const title = document.createElement('h2');
-    title.textContent = movie.title;
-    textDiv.appendChild(title);
-
-    const yearAndRunningTime = document.createElement('p');
-    yearAndRunningTime.textContent = `${movie.year} | ${movie.runningTime}`;
-    textDiv.appendChild(yearAndRunningTime);
-
-    const description = document.createElement('p');
-    description.textContent = movie.description;
-    textDiv.appendChild(description);
-
-    const genreList = document.createElement('ul');
-    movie.genre.forEach(genre => {
-      const li = document.createElement('li');
-      li.textContent = genre;
-      genreList.appendChild(li);
-    });
-    textDiv.appendChild(genreList);
-
-    movieDiv.appendChild(textDiv); // Append the textDiv to the movieDiv
-
-    movieContainer.appendChild(movieDiv); // Append to movieContainer instead of mainDiv
-
-
-    // ...rest of your code
-
-    const downloadButtonDiv = document.createElement('div');
-    downloadButtonDiv.classList.add('download-button-div');
-
-    const torrentButton = document.createElement('button');
-    torrentButton.innerHTML = '<i class="fas fa-download"></i> Torrent Download';
-    downloadButtonDiv.appendChild(torrentButton);
-
-    const magnetButton = document.createElement('button');
-    magnetButton.innerHTML = '<i class="fas fa-magnet"></i> Magnet Download';
-    downloadButtonDiv.appendChild(magnetButton);
-
-    textDiv.appendChild(downloadButtonDiv);
-
-// ...rest of your code
+    createMovieElements(movie, movieContainer);
   }
 });
