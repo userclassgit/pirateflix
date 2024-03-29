@@ -56,6 +56,8 @@ body {
 .movie-container {
   display: flex;
   justify-content: center;
+  /* This keeps elements elements from pushing each other. This makes sure the movie container takes up space even when it's not visibile on the page. */
+  min-height: 300px; 
 }
 
 .movie-info {
