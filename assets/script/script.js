@@ -6,6 +6,7 @@ const searchInput = select(".search");
 const searchButton = select('button');
 const dropdownMenu = select('.dropdown-menu');
 
+
 let dropdownCallback = function() {
   // Clear dropdown menu
   dropdownMenu.innerHTML = '';

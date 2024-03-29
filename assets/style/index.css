@@ -1,8 +1,8 @@
 @charset "utf-8";
 
-/* :root {
-
-} */
+:root {
+  --vertical-spacing: 4rem;
+}
 
 .container {
     width: min(100% - 30px, 1080px);
@@ -30,8 +30,13 @@ body {
   position: relative;
 }
 
+.site-title {
+  line-height: .8;
+}
+
 .search-container {
   position: relative;
+  margin: var(--vertical-spacing) 0;
 }
 
 .search-container form {
@@ -48,10 +53,17 @@ body {
   left: 0;
 }
 
+.movie-container {
+  display: flex;
+  justify-content: center;
+}
+
 .movie-info {
   display: flex;
   align-items: start;
   gap: 20px;
+  /* justify-content: space-between; */
+  width: min(100%, 90rem);
 }
 
 .movie-info img {
