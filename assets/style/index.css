@@ -1,13 +1,14 @@
 @charset "utf-8";
 
 :root {
-  --vertical-spacing: 4rem;
+  --vertical-spacing: 5rem;
   --border-radius: 7px;
   --element-paddings: 1.6rem;
   --red: #C82A3C;
+  --light-red: #d53d4f;
   --black: #000;
   --white: #fff;
-  --text-vertical-spacing: 1.5rem;
+  --text-vertical-spacing: 1.8rem;
 }
 
 .container {
@@ -56,9 +57,14 @@ button[type="submit"] {
   padding: 0 var(--element-paddings);
   color: var(--white);
   background-color: var(--red);
+  transition: all 0.4s;
   .fa-magnifying-glass {
     font-size: 2.1rem;
   }
+}
+
+button[type="submit"]:hover {
+  background-color: var(--light-red);
 }
 
 .search-container {
@@ -91,8 +97,9 @@ button[type="submit"] {
 .movie-info {
   display: flex;
   align-items: start;
-  gap: 20px;
-  width: min(100%, 90rem);
+  /* the gap between the poster image and the text */
+  gap: 3.8rem;
+  width: min(100%, 80rem);
 
   img {
     height: 300px;
@@ -101,9 +108,12 @@ button[type="submit"] {
   }
 
   div {
+    margin-top: -6px;
+
+    /* movie title */
     h2 {
-      font-size: 2.7rem;
-      line-height: .8;
+      font-size: 3rem;
+      line-height: 1.2;
       margin-bottom: var(--text-vertical-spacing);
     }
 
@@ -114,6 +124,30 @@ button[type="submit"] {
     ul {
       display: flex;
       gap: 10px;
+      margin-bottom: var(--text-vertical-spacing);
+      li {
+        padding: 0 var(--element-paddings);
+        border: 1px solid var(--white);
+        border-radius: 50px;
+      }
+    }
+
+    .download-button-div {
+      display: flex;
+      gap: 1.9rem;
+      margin-top: 0.02rem;
+
+      button {
+        transition: all 0.4s;
+        background-color: var(--red);
+        color: var(--white);
+        border-radius: var(--border-radius);
+        padding: 1rem var(--element-paddings);
+      }
+
+      button:hover {
+        background-color: var(--light-red);
+      }
     }
   }
 }

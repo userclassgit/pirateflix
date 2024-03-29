@@ -73,7 +73,7 @@ searchButton.addEventListener('click', function(event) {
     textDiv.appendChild(title);
 
     const yearAndRunningTime = document.createElement('p');
-    yearAndRunningTime.textContent = `${movie.year}, ${movie.runningTime}`;
+    yearAndRunningTime.textContent = `${movie.year} | ${movie.runningTime}`;
     textDiv.appendChild(yearAndRunningTime);
 
     const description = document.createElement('p');
@@ -91,5 +91,23 @@ searchButton.addEventListener('click', function(event) {
     movieDiv.appendChild(textDiv); // Append the textDiv to the movieDiv
 
     movieContainer.appendChild(movieDiv); // Append to movieContainer instead of mainDiv
+
+
+    // ...rest of your code
+
+    const downloadButtonDiv = document.createElement('div');
+    downloadButtonDiv.classList.add('download-button-div');
+
+    const torrentButton = document.createElement('button');
+    torrentButton.innerHTML = '<i class="fas fa-download"></i> Torrent Download';
+    downloadButtonDiv.appendChild(torrentButton);
+
+    const magnetButton = document.createElement('button');
+    magnetButton.innerHTML = '<i class="fas fa-magnet"></i> Magnet Download';
+    downloadButtonDiv.appendChild(magnetButton);
+
+    textDiv.appendChild(downloadButtonDiv);
+
+// ...rest of your code
   }
 });
