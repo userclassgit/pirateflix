@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 :root {
-  --vertical-spacing: 6rem;
+  --vertical-spacing: 5.8rem;
   --border-radius: 7px;
   --element-paddings: 1.6rem;
   --red: #C82A3C;
@@ -68,6 +68,7 @@ body {
 }
 /* search button */
 button[type="submit"] {
+  z-index: 3;
   border-top-right-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
   padding: 0 var(--element-paddings);
@@ -95,12 +96,23 @@ button[type="submit"]:hover {
 
 .dropdown-menu {
   position: absolute;
-  z-index: 1;
+  z-index: 0; 
   width: 100%;
   background-color: white;
   color: black;
   top: 100%;
   left: 0;
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.dropdown-menu.visible {
+  top: calc(100% - var(--border-radius));
+  padding-top: var(--border-radius);
+}
+
+.dropdown-menu li {
+  padding: 3px var(--element-paddings);
 }
 
 .movie-container {

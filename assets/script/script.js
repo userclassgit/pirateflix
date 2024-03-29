@@ -23,6 +23,7 @@ function createListItem(text) {
 function handleListItemClick() {
   searchInput.value = this.textContent;
   dropdownMenu.innerHTML = '';
+  dropdownMenu.classList.remove('visible'); // Remove the 'visible' class when list item is clicked
 }
 
 // Function to populate dropdown menu with given movies
@@ -43,8 +44,10 @@ let dropdownCallback = function() {
 
   if (filteredMovies.length > 0) {
     populateDropdownMenu(filteredMovies);
+    dropdownMenu.classList.add('visible');
   } else {
     dropdownMenu.appendChild(createListItem("Movie not found"));
+    dropdownMenu.classList.add('visible');
   }
 
   dropdownMenu.style.display = this.value ? 'block' : 'none';
@@ -111,4 +114,6 @@ listen('click', searchButton, function(event) {
   if (movie) {
     createMovieElements(movie, movieContainer);
   }
+
+  dropdownMenu.classList.remove('visible');
 });
